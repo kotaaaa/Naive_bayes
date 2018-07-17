@@ -16,9 +16,12 @@ class NaiveBayses:
            self.cv = CountVectorizer()
 
         self.cv.fit([self.file1_text, self.file2_text])
+        # print(self.cv.vocabulary_)
         self.clf = MultinomialNB()
         self.x1 = self.cv.transform([self.file1_text])
+        # print(self.x1.toarray())
         self.x2 = self.cv.transform([self.file2_text])
+        # print(self.x2.toarray())
         X = np.concatenate((self.x1.toarray(), self.x2.toarray()))
         self.clf.fit(X, [1,2])
 
@@ -38,6 +41,7 @@ class NaiveBayses:
 
     def predict(self, text):
         x = self.cv.transform([text]).toarray()
+        # print(x)
         return self.clf.predict(x)
 
     def predict_log_proba(self, text):
