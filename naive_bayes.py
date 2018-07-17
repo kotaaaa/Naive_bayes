@@ -31,7 +31,7 @@ class NaiveBayses:
         return self.x1.toarray()
 
     def get_words_frequency_file2(self):
-        return self.cv.transform([self.file2_text]).toarray()
+        return self.x2.toarray()
 
     def get_vocabulary(self):
         return self.cv.vocabulary_
