@@ -27,12 +27,6 @@ class NaiveBayses:
         tokens =  t.tokenize(text)
         return [token.surface for token in tokens]
 
-    def print_file1(self):
-        print(self.file1_text)
-
-    def print_file2(self):
-        print(self.file2_text)
-
     def get_words_frequency_file1(self):
         return self.x1.toarray()
 
