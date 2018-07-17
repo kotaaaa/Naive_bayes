@@ -10,18 +10,16 @@ class NaiveBayses:
         f = open(file2)
         self.file2_text = f.read()
 
-        full_text = self.file1_text + self.file2_text
         if mode == "jpn":
            self.cv = CountVectorizer(analyzer=self.split_words)
         else:
            self.cv = CountVectorizer()
 
         self.cv.fit([self.file1_text, self.file2_text])
-
         self.clf = MultinomialNB()
-        x1 = self.cv.transform([self.file1_text])
-        x2 = self.cv.transform([self.file2_text])
-        X = np.concatenate((x1.toarray(), x2.toarray()))
+        self.x1 = self.cv.transform([self.file1_text])
+        self.x2 = self.cv.transform([self.file2_text])
+        X = np.concatenate((self.x1.toarray(), self.x2.toarray()))
         self.clf.fit(X, [1,2])
 
     def split_words(self,text):
@@ -36,7 +34,7 @@ class NaiveBayses:
         print(self.file2_text)
 
     def get_words_frequency_file1(self):
-        return self.cv.transform([self.file1_text]).toarray()
+        return self.x1.toarray()
 
     def get_words_frequency_file2(self):
         return self.cv.transform([self.file2_text]).toarray()
